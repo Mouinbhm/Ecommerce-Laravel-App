@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,6 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adm
 
 // Named route for client dashboard
 Route::get('/client/dashboard', [ClientController::class, 'dashboard'])->name('client.dashboard');
+
+
+Route::get('/admin/categories',[CategoryController::class, 'index']);

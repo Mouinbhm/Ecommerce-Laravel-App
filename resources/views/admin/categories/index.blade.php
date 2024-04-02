@@ -61,11 +61,13 @@
         <nav class="navbar navbar-light navbar-top navbar-expand">
           <div class="navbar-logo"><button class="btn navbar-toggler navbar-toggler-humburger-icon" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button> <a class="navbar-brand me-1 me-sm-3" href="index.html">
               <div class="d-flex align-items-center">
-                <div class="d-flex align-items-center"><img src="{{asset('Dashassets/img/icons/lgcar.png')}} " alt="phoenix" width="64">
-                 <a href="/admin/dashboard">
-                  <p class="logo-text ms-2 d-none d-sm-block">TnAuto</p>
-                 </a>
+                <div class="d-flex align-items-center">
+                    <img src="{{asset('Dashassets/img/icons/lgcar.png')}}" alt="phoenix" width="64" class="me-2">
+                    <a href="/admin/dashboard">
+                        <p class="logo-text d-none d-sm-block">TnAuto</p>
+                    </a>
                 </div>
+                
               </div>
             </a></div>
           <div class="collapse navbar-collapse">
@@ -177,7 +179,7 @@
           <div class="pb-5">
             <div class="row g-5">
           <div> 
-            Adiministrateur
+            <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Ajouter Categorie</a>
           </div>
              
             </div>
@@ -188,7 +190,6 @@
           <footer class="footer">
             <div class="row g-0 justify-content-between align-items-center h-100 mb-3">
               <div class="col-12 col-sm-auto text-center">
-                <p class="mb-0 text-900">Thank you for creating with phoenix<span class="d-none d-sm-inline-block"></span><span class="mx-1">|</span><br class="d-sm-none">2022 &copy; <a href="https://themewagon.com">Themewagon</a></p>
               </div>
               <div class="col-12 col-sm-auto text-center">
                 <p class="mb-0 text-600">v1.1.0</p>
@@ -198,6 +199,34 @@
         </div>
       </div>
     </main>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter Categorie</h5><button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs--1"></span></button>
+      </div>
+      <form action="#" >
+      <div class="modal-body">
+   
+          
+          <div class="mb-3"><label class="form-label" for="exampleFormControlInput1">Nom Categorie</label>
+             <input class="form-control" id="exampleFormControlInput1" type="text" placeholder="tapper nom categorie"></div>
+          <div class="mb-0"><label class="form-label" for="exampleTextarea">Description</label> <textarea class="form-control" rows="3"> </textarea></div>
+        
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">Okay</button>
+        <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+    </div>
+  </form>
+    </div>
+  </div>
+</div>
+
+
     <script src="{{asset('Dashassets/js/phoenix.js')}}"></script>
     <script src="{{asset('Dashassets/js/ecommerce-dashboard.js')}}"></script>
   </body>
