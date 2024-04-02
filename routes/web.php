@@ -31,4 +31,5 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adm
 Route::get('/client/dashboard', [ClientController::class, 'dashboard'])->name('client.dashboard');
 
 
-Route::get('/admin/categories',[CategoryController::class, 'index']);
+Route::get('/admin/categories', [CategoryController::class, 'index']);
+Route::post('/admin/category/store', [CategoryController::class, 'store']);
