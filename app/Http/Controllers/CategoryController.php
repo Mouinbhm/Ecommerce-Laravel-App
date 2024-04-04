@@ -23,7 +23,41 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->description = $request->description;
 
-        $category->save();
-        return redirect()->back()->with('success', 'Category created successfully');
+        if ($category->save()) {
+            return redirect()->back()->with('success', 'Category created successfully');
+        } else {
+            echo "error";
+        }
     }
+
+    public function destroy($id)
+    {
+        $category = Category::findOrFail($id);
+        if ($category->delete()) {
+            return redirect()->back()->with('success', 'Category deleted successfully');
+        } else {
+            return redirect()->back()->with('error', 'Failed to delete category');
+        }
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'id_category' => 'required|exists:categories,id',
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+    
+        $id = $request->id_category;
+        $category = Category::findOrFail($id); // Correction ici
+    
+        $category->name = $request->name;
+        $category->description = $request->description;
+        if ($category->update()) {
+            return redirect()->back()->with('success', 'Category updated successfully'); // Modification du message de réussite
+        } else {
+            return redirect()->back()->with('error', 'Failed to update category'); // Modification du message d'erreur
+        }
+    }
+    
 }
