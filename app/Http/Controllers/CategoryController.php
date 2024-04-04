@@ -47,10 +47,10 @@ class CategoryController extends Controller
             'name' => 'required',
             'description' => 'required',
         ]);
-    
+
         $id = $request->id_category;
-        $category = Category::findOrFail($id); // Correction ici
-    
+        $category = Category::findOrFail($id);
+
         $category->name = $request->name;
         $category->description = $request->description;
         if ($category->update()) {
@@ -59,5 +59,4 @@ class CategoryController extends Controller
             return redirect()->back()->with('error', 'Failed to update category'); // Modification du message d'erreur
         }
     }
-    
 }
