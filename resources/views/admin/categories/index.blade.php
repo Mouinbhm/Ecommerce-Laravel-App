@@ -319,12 +319,16 @@
                                 <tbody>
                                     @foreach ($categories as $index => $c)
                                         <tr>
-                                            <th scope="row">{{ $index+1 }}</th>
+                                            <th scope="row">{{ $index + 1 }}</th>
                                             <td>{{ $c->name }}</td>
                                             <td>{{ $c->description }}</td>
                                             <td>
-                                              <a href="" class="btn btn-success">Modifier</a>
-                                              <a href="" class="btn btn-danger">Supprimer</a>
+                                                <a data-bs-toggle="modal"
+                                                    data-bs-target="#editCategory{{ $c->id }}"
+                                                    class="btn btn-success">Modifier</a>
+                                                <a onclick="return confirm('Voulez-vous supprimer cette catégorie ?')"
+                                                    href="/admin/category/{{ $c->id }}/delete"
+                                                    class="btn btn-danger">Supprimer</a>
 
 
                                             </td>
@@ -411,6 +415,68 @@
         </div>
     </div>
 
+
+    @foreach ($categories as $index => $c)
+        <!--Modal modifier-->
+        <div class="modal fade" id="editCategory{{ $c->id }}" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modifier Categorie :<span
+                                class="text-primary">
+                                {{ $c->name }}</span>
+
+                        </h5><button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span
+                                class="fas fa-times fs--1"></span></button>
+                    </div>
+                    <form action="/admin/category/update" method="post">
+                        @csrf
+                        <div class="modal-body">
+
+
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleFormControlInput1">Nom Categorie</label>
+                                <input name="name" class="form-control" id="exampleFormControlInput1" 
+                                    type="text" value="{{ $c->name }}" placeholder="tapper nom categorie">
+
+                                @error('name')
+                                    <div class="alert alert-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+
+
+                            </div>
+
+                            <div class="mb-0">
+                                <label class="form-label" for="exampleTextarea">Description</label>
+                                <textarea name="description" class="form-control" rows="3"> {{$c->description}} </textarea>
+
+                                @error('description')
+                                    <div class="alert alert-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+
+                            </div>
+
+                            <input type="hidden" value="{{$c->id}}" name="id_category">
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">Okay</button>
+                            <button class="btn btn-outline-primary" type="button"
+                                data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
     <script src="{{ asset('Dashassets/js/phoenix.js') }}"></script>
     <script src="{{ asset('Dashassets/js/ecommerce-dashboard.js') }}"></script>

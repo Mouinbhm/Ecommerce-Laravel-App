@@ -33,3 +33,5 @@ Route::get('/client/dashboard', [ClientController::class, 'dashboard'])->name('c
 
 Route::get('/admin/categories', [CategoryController::class, 'index']);
 Route::post('/admin/category/store', [CategoryController::class, 'store']);
+Route::get('/admin/category/{id}/delete', [CategoryController::class, 'destroy']);
+Route::post('/admin/category/update', [CategoryController::class, 'update']);
