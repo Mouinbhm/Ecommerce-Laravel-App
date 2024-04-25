@@ -32,8 +32,8 @@
     <main class="main" id="top">
         <div class="container-fluid px-0">
 
-@include("include.admin.sidebar")
-@include("include.admin.nav")
+            @include('include.admin.sidebar')
+            @include('include.admin.nav')
 
 
             <div class="content">
@@ -42,39 +42,49 @@
 
 
                         <div class="d-flex align-items-center">
-                            <h5>Voulez-vous ajouter une catégorie ?</h5>
+                            <h5>Voulez-vous ajouter un produit ?</h5>
                             <a data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                class="btn btn-primary ms-6">Ajouter Catégorie</a>
+                                class="btn btn-primary ms-6">Ajouter Prdouit</a>
                         </div>
                         <hr />
 
                         <div class="mt-5">
-                            <h2>Liste des categories :</h2>
+                            <h2>Liste des produits:</h2>
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Nom categorie</th>
-                                        <th scope="col">Description categorie</th>
-                                        <th scope="col">Actions</th>
-                                    </tr>
+                                        <th scope="col">Nom Produit</th>
+                                        <th scope="col">Description Produit</th>
+                                        <th scope="col">Prix</th>
+                                        <th scope="col">Quantite</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Action</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $index => $c)
+                                    @foreach ($products as $index => $p)
                                         <tr>
-                                            <th scope="row">{{ $index + 1 }}</th>
-                                            <td>{{ $c->name }}</td>
-                                            <td>{{ $c->description }}</td>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $p->name }}</td>
+                                            <td>{{ $p->description }}</td>
+                                            <td>{{ $p->price }}</td>
+                                            <td>{{ $p->qte }}</td>
+                                            <td>{{ $p->image }}</td>
                                             <td>
-                                                <a data-bs-toggle="modal"
-                                                    data-bs-target="#editCategory{{ $c->id }}"
-                                                    class="btn btn-success">Modifier</a>
-                                                <a onclick="return confirm('Voulez-vous supprimer cette catégorie ?')"
-                                                    href="/admin/category/{{ $c->id }}/delete"
-                                                    class="btn btn-danger">Supprimer</a>
+                                                <th scope="row">{{ $index + 1 }}</th>
+                                                <td>{{ $c->name }}</td>
+                                                <td>{{ $c->description }}</td>
+                                                <td>
+                                                    <a data-bs-toggle="modal"
+                                                        data-bs-target="#editProduct{{ $c->id }}"
+                                                        class="btn btn-success">Modifier</a>
+                                                    <a onclick="return confirm('Voulez-vous supprimer cette produit ?')"
+                                                        href="/admin/product/{{ $c->id }}/delete"
+                                                        class="btn btn-danger">Supprimer</a>
+    
+    
+                                                </td>
 
-
-                                            </td>
                                         </tr>
                                     @endforeach
 
@@ -104,32 +114,29 @@
 
 
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajouter Categorie</h5><button class="btn p-1"
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter Produit</h5><button class="btn p-1"
                         type="button" data-bs-dismiss="modal" aria-label="Close"><span
                             class="fas fa-times fs--1"></span></button>
                 </div>
-                <form action="/admin/category/store" method="post">
+                <form action="/admin/product/store" method="post">
                     @csrf
                     <div class="modal-body">
 
 
                         <div class="mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">Nom Categorie</label>
+                            <label class="form-label" for="exampleFormControlInput1">Nom Produit</label>
                             <input name="name" class="form-control" id="exampleFormControlInput1" type="text"
-                                placeholder="tapper nom categorie">
+                                placeholder="tapper nom produit">
 
                             @error('name')
                                 <div class="alert alert-danger">
                                     {{ $message }}
                                 </div>
                             @enderror
-
-
                         </div>
 
                         <div class="mb-0">
@@ -141,8 +148,46 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-
                         </div>
+
+
+                        <div class="mb-3">
+                            <label class="form-label" for="exampleFormControlInput1">prix</label>
+                            <input name="price" class="form-control" id="exampleFormControlInput1" type="number"
+                                placeholder="tapper prix de produit">
+
+                            @error('price')
+                                <div class="alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="exampleFormControlInput1">Quantite</label>
+                            <input name="qte" class="form-control" id="exampleFormControlInput1" type="number"
+                                placeholder="tapper quantite">
+
+                            @error('qte')
+                                <div class="alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="exampleFormControlInput1">Image</label>
+                            <input name="image" class="form-control" id="exampleFormControlInput1" type="file"
+                                placeholder="tapper nom produit">
+
+                            @error('image')
+                                <div class="alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+
 
 
 
@@ -150,8 +195,7 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-primary" type="submit">Okay</button>
-                        <button class="btn btn-outline-primary" type="button"
-                            data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </form>
             </div>
@@ -159,67 +203,6 @@
     </div>
 
 
-    @foreach ($categories as $index => $c)
-        <!--Modal modifier-->
-        <div class="modal fade" id="editCategory{{ $c->id }}" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modifier Categorie :<span
-                                class="text-primary">
-                                {{ $c->name }}</span>
-
-                        </h5><button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span
-                                class="fas fa-times fs--1"></span></button>
-                    </div>
-                    <form action="/admin/category/update" method="post">
-                        @csrf
-                        <div class="modal-body">
-
-
-                            <div class="mb-3">
-                                <label class="form-label" for="exampleFormControlInput1">Nom Categorie</label>
-                                <input name="name" class="form-control" id="exampleFormControlInput1" 
-                                    type="text" value="{{ $c->name }}" placeholder="tapper nom categorie">
-
-                                @error('name')
-                                    <div class="alert alert-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-
-
-                            </div>
-
-                            <div class="mb-0">
-                                <label class="form-label" for="exampleTextarea">Description</label>
-                                <textarea name="description" class="form-control" rows="3"> {{$c->description}} </textarea>
-
-                                @error('description')
-                                    <div class="alert alert-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-
-                            </div>
-
-                            <input type="hidden" value="{{$c->id}}" name="id_category">
-
-
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" type="submit">Okay</button>
-                            <button class="btn btn-outline-primary" type="button"
-                                data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    @endforeach
 
     <script src="{{ asset('Dashassets/js/phoenix.js') }}"></script>
     <script src="{{ asset('Dashassets/js/ecommerce-dashboard.js') }}"></script>

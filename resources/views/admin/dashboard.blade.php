@@ -23,9 +23,13 @@
     <link href="{{ asset('Dashassets/css/user.min.css') }}" rel="stylesheet" id="user-style-default">
     <style>
         body {
-            opacity: 0;
+            opacity: 1;
+            /* Changement de l'opacité à 1 */
+            background-color: #f0f0f0;
+            /* Ajout d'une couleur de fond */
         }
     </style>
+
 </head>
 
 <body>
@@ -34,8 +38,8 @@
 
 
             <!--include html code-->
-            @include('include.admin.sidebar');
-            @include('include.admin.nav');
+            @include('include.admin.sidebar')
+            @include('include.admin.nav')
 
             <div class="content">
                 <div class="pb-5">
@@ -66,6 +70,7 @@
     </main>
     <script src="{{ asset('Dashassets/js/phoenix.js') }}"></script>
     <script src="{{ asset('Dashassets/js/ecommerce-dashboard.js') }}"></script>
+
 </body>
 
 </html>
